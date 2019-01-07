@@ -159,7 +159,7 @@ events.forEach(event=>{
   });
 });
 }
-
+console.log("Step 1 \n")
 Step1_BookingPrice();
 events.forEach(event=>{console.log("The price for the event is : "+event.price);});
 
@@ -177,6 +177,29 @@ events.forEach(event=>{
     }
   });
 }
-
+console.log("Step 2 \n")
 Step2_Discount();
 events.forEach(event=>{console.log("The price for the event after discount is : "+event.price);});
+
+
+function Step3_PayTheBar(){
+events.forEach(event=>{
+  	actors.forEach(actor =>{
+  		var commission=event.price*0.3;
+  		if(actor.eventId==event.id){
+  			actor.payment[1].amount=event.price*(0.7);
+  			actor.payment[2].amount=0.5*(commission);
+  			actor.payment[3].amount=event.persons;
+  			actor.payment[4].amount=commission-(actor.payment[2].amount+actor.payment[3].amount);
+  		}
+  	})
+  });
+}
+console.log("Step 3 \n")
+Step3_PayTheBar()
+actors.forEach(actor=>{console.log(
+	"The amount due to the bar is : "+actor.payment[1].amount+
+	"\n"+"The amount due to the insurance is : "+actor.payment[2].amount
+	+"\n"+"The amount due to the treasury is : "+actor.payment[3].amount
+	+"\n"+"The amount due to the privateaser is : "+actor.payment[4].amount);
+})
