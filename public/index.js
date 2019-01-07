@@ -162,3 +162,21 @@ events.forEach(event=>{
 
 Step1_BookingPrice();
 events.forEach(event=>{console.log("The price for the event is : "+event.price);});
+
+function Step2_Discount(){
+events.forEach(event=>{
+  
+    if (event.persons>=10 && event.persons<20) {
+      event.price -=event.price*0.1;
+    }
+    if (event.persons>=20 && event.persons<60) {
+      event.price -=event.price*0.3;
+    }
+    if (event.persons>=60) {
+      event.price -=event.price*0.5;
+    }
+  });
+}
+
+Step2_Discount();
+events.forEach(event=>{console.log("The price for the event after discount is : "+event.price);});
