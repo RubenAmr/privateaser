@@ -191,9 +191,27 @@ events.forEach(event=>{
   		
   	})
 }
+console.log("Step 3 \n")
+Step3_PayTheBar()
+events.forEach(event=>{console.log(
+	"The amount due to the bar is : "+event.price*(0.7)+
+	"\n"+"The amount due to the insurance is : "+event.commission.insurance
+	+"\n"+"The amount due to the treasury is : "+event.commission.treasury
+	+"\n"+"The amount due to the privateaser is : "+event.commission.privateaser);
+})
+
+function Step4_TheDeductible(){
+events.forEach(event=>{
+  		event.options.deductibleReduction=true;
+  		event.price+=event.persons;
+  	})
+}
+console.log("Step 4 \n")
+Step4_TheDeductible();
+events.forEach(event=>{console.log("The price for the event after if the deductible is applied is : "+event.price);});
 
 
-function Step5_PayTheBar(){
+function Step5_PayTheActors(){
 events.forEach(event=>{
   	actors.forEach(actor =>{
   		var commission=event.price*0.3;
@@ -206,12 +224,3 @@ events.forEach(event=>{
   	})
   });
 }
-console.log("Step 3 \n")
-Step3_PayTheBar()
-events.forEach(event=>{console.log(
-	"The amount due to the bar is : "+event.price*(0.7)+
-	"\n"+"The amount due to the insurance is : "+event.commission.insurance
-	+"\n"+"The amount due to the treasury is : "+event.commission.treasury
-	+"\n"+"The amount due to the privateaser is : "+event.commission.privateaser);
-})
-
