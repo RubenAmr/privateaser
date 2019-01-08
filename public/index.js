@@ -184,6 +184,17 @@ events.forEach(event=>{console.log("The price for the event after discount is : 
 
 function Step3_PayTheBar(){
 events.forEach(event=>{
+  		var commission=event.price*0.3;
+  			event.commission.insurance=0.5*(commission);
+  			event.commission.treasury=event.persons;
+  			event.commission.privateaser=commission-(event.commission.insurance+event.commission.treasury);
+  		
+  	})
+}
+
+
+function Step5_PayTheBar(){
+events.forEach(event=>{
   	actors.forEach(actor =>{
   		var commission=event.price*0.3;
   		if(actor.eventId==event.id){
@@ -197,9 +208,10 @@ events.forEach(event=>{
 }
 console.log("Step 3 \n")
 Step3_PayTheBar()
-actors.forEach(actor=>{console.log(
-	"The amount due to the bar is : "+actor.payment[1].amount+
-	"\n"+"The amount due to the insurance is : "+actor.payment[2].amount
-	+"\n"+"The amount due to the treasury is : "+actor.payment[3].amount
-	+"\n"+"The amount due to the privateaser is : "+actor.payment[4].amount);
+events.forEach(event=>{console.log(
+	"The amount due to the bar is : "+event.price*(0.7)+
+	"\n"+"The amount due to the insurance is : "+event.commission.insurance
+	+"\n"+"The amount due to the treasury is : "+event.commission.treasury
+	+"\n"+"The amount due to the privateaser is : "+event.commission.privateaser);
 })
+
