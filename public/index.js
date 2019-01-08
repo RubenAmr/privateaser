@@ -216,11 +216,26 @@ events.forEach(event=>{
   	actors.forEach(actor =>{
   		var commission=event.price*0.3;
   		if(actor.eventId==event.id){
-  			actor.payment[1].amount=event.price*(0.7);
+  			actor.payment[1].amount=event.price-commission;
   			actor.payment[2].amount=0.5*(commission);
   			actor.payment[3].amount=event.persons;
-  			actor.payment[4].amount=commission-(actor.payment[2].amount+actor.payment[3].amount);
+  			if(event.options.deductibleReduction==true){
+  				actor.payment[4].amount=200+commission-(actor.payment[2].amount+actor.payment[3].amount);
+
+  			}
+  			else{
+  			actor.payment[4].amount=5000+commission-(actor.payment[2].amount+actor.payment[3].amount);
+  			}
   		}
   	})
   });
 }
+
+console.log("Step 5 \n")
+Step5_PayTheActors()
+actors.forEach(actor=>{console.log(
+	"The amount due to the bar is : "+actor.payment[1].amount+
+	"\n"+"The amount due to the insurance is : "+actor.payment[2].amount
+	+"\n"+"The amount due to the treasury is : "+actor.payment[3].amount
+	+"\n"+"The amount due to the privateaser is : "+actor.payment[4].amount);
+})
